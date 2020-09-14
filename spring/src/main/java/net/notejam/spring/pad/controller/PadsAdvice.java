@@ -5,6 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,6 +28,8 @@ import net.notejam.spring.pad.controller.PadsAdvice.Pads;
 @ControllerAdvice(annotations = Pads.class)
 @PreAuthorize("isAuthenticated()")
 public class PadsAdvice {
+
+    private static UUID uuid = UUID.randomUUID();
 
     /**
      * Provide all pads of the authenticated user as the model attribute pads.
@@ -55,6 +58,11 @@ public class PadsAdvice {
     @ModelAttribute("pads")
     public List<Pad> pads() {
         return service.getAllPads();
+    }
+
+    @ModelAttribute("appId")
+    public String appId() {
+        return PadsAdvice.uuid.toString();
     }
 
 }

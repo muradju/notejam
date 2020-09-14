@@ -47,6 +47,7 @@
 			<div class="sign-in-out-block" sec:authorize="isAuthenticated()">
 				<form th:action="@{${T(net.notejam.spring.URITemplates).SIGNOUT}}"
 					method="POST">
+					<span th:text="${appId}">APP ID</span>
 					<span sec:authentication="name">Bob</span> <a
 						th:href="@{${T(net.notejam.spring.URITemplates).SETTINGS}}"
 						href="#" th:text="#{menu.account}">Account</a>&nbsp;&nbsp;&nbsp;<input
